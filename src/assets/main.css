@@ -1,35 +1,37 @@
-@import './base.css';
+@import '@/assets/base.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+@tailwind base;
+@layer base {
+  /* Extend preflight styles */
+  /* https://v2.tailwindcss.com/docs/preflight#extending-preflight */
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
+@tailwind components;
+@layer components {
+  /* Include custom classes using @apply */
+  /* https://v2.tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply */
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-center-col {
+    @apply flex items-center justify-center flex-col;
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+@tailwind utilities;
+@layer utilities {
+  /* Include custom utilities */
+  /* https://v2.tailwindcss.com/docs/adding-new-utilities#using-css */
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+  /* @variants responsive { */
+  /* Include custom classes that can be used responsively */
+  /* https://v2.tailwindcss.com/docs/adding-new-utilities#generating-responsive-variants */
+  /* } */
+
+  /* @variants hover, focus { */
+  /* Include state varients */
+  /* https://v2.tailwindcss.com/docs/adding-new-utilities#generating-state-variants */
+  /* } */
 }
