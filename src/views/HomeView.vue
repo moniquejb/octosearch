@@ -10,7 +10,9 @@
         <PerPageDropdown @change="handlePerPageChange" v-model="pagination.perPage" class="self-center xs:self-end" />
         <ul id="results" role="list" class="divide-y divide-gray-100">
           <template v-for="item in searchData.items" :key="item.id">
-            <ResultListItem :item="item" />
+            <router-link v-if="item.owner" target="_blank" :to="{ name: 'repository', params: { owner: item.owner.login, repo: item.name } }">
+              <RepoBasicItem :item="item" class="group hover:shadow-md" />
+            </router-link>
           </template>
         </ul>
         <PrevNextPaginator @change="handlePageChange" class="w-full flex justify-center mt-2" :current-page="pagination.page" :has-next="pagesRemaining" />
@@ -32,7 +34,7 @@ import { focusElement, scrollTo } from '@/utilities'
 import PerPageDropdown from '@/components/pagination/PerPageDropdown.vue'
 import type { Pagination, PaginatorOption, PerPageOption } from '@/types/pagination'
 import PrevNextPaginator from '@/components/pagination/PrevNextPaginator.vue'
-import ResultListItem from '@/components/search/ResultListItem.vue'
+import RepoBasicItem from '@/components/repository/RepoBasicItem.vue'
 import SearchInput from '@/components/search/SearchInput.vue'
 import OctocatMascot from '@/components/search/OctocatMascot.vue'
 
