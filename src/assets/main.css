@@ -18,6 +18,10 @@
   .flex-center-col {
     @apply flex items-center justify-center flex-col;
   }
+
+  .feat-link {
+    @apply text-[15px] flex gap-1 items-center text-gray-400 hover:text-gray-500;
+  }
 }
 
 @tailwind utilities;

@@ -21,6 +21,7 @@ class InterceptedOctokit extends Octokit {
     this.hook.error('request', async (error, options) => {
       const miscStore = useMiscStore()
       miscStore.loading = false
+      alert(error?.message || 'An error occurred')
       throw error
     })
   }

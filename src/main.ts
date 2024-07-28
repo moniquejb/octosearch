@@ -13,11 +13,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faSearch, faStar, faChevronDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-const solidIcons = [faSearch, faStar, faChevronDown, faChevronLeft, faChevronRight]
+import { faMessage, faCircleDot, faCircleCheck } from '@fortawesome/free-regular-svg-icons'
+import { faComment, faSearch, faStar, faChevronDown, faChevronLeft, faChevronRight, faCodeFork, faEye, faLink } from '@fortawesome/free-solid-svg-icons'
+const solidIcons = [faComment, faSearch, faStar, faChevronDown, faChevronLeft, faChevronRight, faCodeFork, faEye, faLink]
+const regularIcons = [faMessage, faCircleDot, faCircleCheck]
 
 /* add icons to the library */
-library.add(...solidIcons)
+library.add(...solidIcons, ...regularIcons)
 
 const app = createApp(App)
 
