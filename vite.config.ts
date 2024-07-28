@@ -13,6 +13,9 @@ export default defineConfig({
   },
   server: {
     port: 1585,
-    host: true
+    host: true,
+    hmr: {
+      overlay: false
+    }
   }
 })

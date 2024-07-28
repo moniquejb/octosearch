@@ -1,3 +1,5 @@
+import extend from './src/tailwind/extend'
+
 module.exports = {
   // https://tailwindcss.com/docs/content-configuration
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
@@ -5,12 +7,10 @@ module.exports = {
   theme: {
     // https://v2.tailwindcss.com/docs/theme
     extend: {
-      colors: {},
-      keyframes: {},
-      animation: {},
-      screens: {
-        xs: '480px'
-      }
+      colors: extend.colors,
+      keyframes: extend.keyframes,
+      animation: extend.animation,
+      screens: extend.screens
     }
   },
   variants: {

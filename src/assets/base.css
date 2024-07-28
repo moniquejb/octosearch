@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200..1000&display=swap');
+
 *,
 *::before,
 *::after {
@@ -6,29 +8,40 @@
   font-weight: normal;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   min-height: 100vh;
-  color: rgb(20, 20, 20);
+  color: #374151;
   background: whitesmoke;
   transition:
     color 0.5s,
     background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
-  font-size: 15px;
+  line-height: 1.5;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 0.6rem;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px #37415180;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #6b7280;
+  border-radius: 10px;
+}
+
+.cursor-search {
+  cursor: url('search-cursor.svg'), auto;
 }
