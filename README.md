@@ -4,7 +4,7 @@
 
 https://octosearch.netlify.app
 
-Search GitHub repositiories and view individual repository details (basic) and issues -  while Octocat cheers you on!
+Search GitHub repositories and view individual repository details (basic) and issues -  while Octocat cheers you on!
 
 ## Technologies
 * Vue.js (composition API, script setup)
@@ -30,4 +30,4 @@ npm run dev
 ```
 
 ### GitHub API Authentication
-To make authenticated API calls to the GitHub api while running the project locally, locate the [.env.development](https://github.com/moniquejb/octosearch/blob/main/.env.development) file in the project root and replace "YOUR TOKEN HERE" with your [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+To make authenticated API calls to the GitHub API while running the project locally, locate the [.env.development](https://github.com/moniquejb/octosearch/blob/main/.env.development) file in the project root and replace "YOUR TOKEN HERE" with your [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
