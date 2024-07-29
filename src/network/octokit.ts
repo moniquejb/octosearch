@@ -4,6 +4,8 @@ import { useMiscStore } from '@/stores/misc'
 import { useNotification } from '@kyvg/vue3-notification'
 
 class InterceptedOctokit extends Octokit {
+  // Intercept api requests to handle loader visibility and error messages
+
   constructor(options: OctokitOptions) {
     super(options)
     this.interceptRequests()

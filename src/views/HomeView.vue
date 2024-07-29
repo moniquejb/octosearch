@@ -76,16 +76,19 @@ function submitSearch() {
 async function loadInitialData() {
   noResults.value = false
   const res = await providerRepoSearch(searchValue.value, pagination.value.page, pagination.value.perPage)
-  searchData.value = res.data
-  pagesRemaining.value = determinePagesRemaining(res.headers.link)
 
-  if (!searchData.value.items.length) {
-    noResults.value = true
+  if (res?.data) {
+    searchData.value = res.data
+    pagesRemaining.value = determinePagesRemaining(res.headers.link)
+
+    if (!searchData.value.items.length) {
+      noResults.value = true
+    }
+
+    setTimeout(() => {
+      scrollTo('#results')
+    }, 0)
   }
-
-  setTimeout(() => {
-    scrollTo('#results')
-  }, 0)
 }
 </script>
 
