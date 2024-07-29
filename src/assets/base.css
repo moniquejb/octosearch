@@ -43,5 +43,5 @@ body::-webkit-scrollbar-thumb {
 }
 
 .cursor-search {
-  cursor: url('search-cursor.svg'), auto;
+  cursor: url('/search-cursor.svg'), auto;
 }
