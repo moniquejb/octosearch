@@ -1,5 +1,5 @@
 import { octokit } from '@/network/octokit'
-import type { GetRepoIssuesListResponseType, GetRepoResponseType } from '@/types/octokit'
+import type { GetRepoIssuesListResponseType, GetRepoResponseType, IssueResult } from '@/types/octokit'
 import type { IssueState } from '@/types/repos'
 
 export function providerRepoGet(owner: string, repo: string): Promise<GetRepoResponseType> {
@@ -28,23 +28,21 @@ export function providerRepoGetIssues(owner: string, repo: string, state: IssueS
   })
 }
 
-const queryIssues = (owner: string, repo: string, state: 'OPEN' | 'CLOSED'): string => {
-  // Gave this a try but got a 'API rate limit exceeded' every time
-  return `query { 
-  repository(owner:"${owner}", name:"${repo}") { 
-    issues(states:${state}) {
+const queryIssues = `query issueCount($owner: String!, $repo: String!, $states: [IssueState!]!) {
+  repository(owner: $owner, name: $repo) {
+    issues(states: $states) {
       totalCount
     }
   }
 }`
-}
 
-export function providerIssueCount(owner: string, repo: string, state: 'OPEN' | 'CLOSED'): Promise<number> {
+export function providerIssueCount(owner: string, repo: string, states: 'OPEN' | 'CLOSED'): Promise<number | null> {
   return new Promise((resolve, reject) => {
     octokit
-      .graphql(queryIssues(owner, repo, state))
+      .graphql(queryIssues, { owner, repo, states })
       .then((res) => {
-        resolve(res as number)
+        const total = (res as IssueResult).repository?.issues?.totalCount || null
+        resolve(total)
       })
       .catch((e) => {
         reject(e)

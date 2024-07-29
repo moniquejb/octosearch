@@ -2,7 +2,7 @@
   <div class="home-view w-full flex flex-col items-center py-10">
     <OctocatMascot />
     <div class="w-full flex justify-center">
-      <SearchInput @submit="loadInitialData" v-model="searchValue" />
+      <SearchInput @submit="submitSearch" v-model="searchValue" />
     </div>
 
     <div class="w-full flex flex-col items-center">
@@ -66,6 +66,11 @@ function clearSearch() {
   searchValue.value = ''
   noResults.value = false
   focusElement('search')
+}
+
+function submitSearch() {
+  pagination.value.page = 1
+  loadInitialData()
 }
 
 async function loadInitialData() {

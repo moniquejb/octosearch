@@ -1,5 +1,6 @@
 <template>
   <main class="relative">
+    <Notifications position="top center" ignore-duplicates pause-on-hover />
     <SearchLoader v-if="miscStore.loading" />
     <router-view />
   </main>

@@ -6,6 +6,8 @@ import { createPinia } from 'pinia'
 import App from '@/App.vue'
 import router from '@/router'
 
+import Notifications from '@kyvg/vue3-notification'
+
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -24,6 +26,7 @@ library.add(...solidIcons, ...regularIcons)
 const app = createApp(App)
 
 app.component('font-awesome-icon', FontAwesomeIcon)
+app.use(Notifications)
 app.use(createPinia())
 app.use(router)
 

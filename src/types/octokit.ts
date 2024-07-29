@@ -14,3 +14,12 @@ export type GetRepoResponseDataType = GetResponseDataTypeFromEndpointMethod<type
 export type GetRepoIssuesListResponseType = GetResponseTypeFromEndpointMethod<typeof octokit.rest.issues.list>
 export type GetRepoIssuesListResponseDataType = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.list>
 export type GetRepoIssuesListResultItem = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.list>[number]
+
+// GraphQl
+export type IssueResult = {
+  repository: {
+    issues: {
+      totalCount: number
+    }
+  }
+}

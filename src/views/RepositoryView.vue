@@ -38,7 +38,11 @@ onMounted(() => {
 })
 
 async function loadInitialData() {
-  repoData.value = (await providerRepoGet(props.owner, props.repo)).data
+  const res = await providerRepoGet(props.owner, props.repo)
+
+  if (res?.data) {
+    repoData.value = res.data
+  }
 }
 </script>
 

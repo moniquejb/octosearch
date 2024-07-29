@@ -5,6 +5,12 @@
       Issues
     </div>
     <div v-if="repoIssues?.length" class="flex flex-col w-full">
+      <div v-if="loadingChart || chartData" class="w-full pb-4">
+        <div class="max-w-80 mx-auto">
+          <BarChart :data="chartData" />
+        </div>
+      </div>
+
       <div class="flex flex-wrap w-full gap-x-2 justify-center md:justify-end">
         <RepoIssueStateFilter @change="handleIssueStateChange" v-model="stateFilter" box-class="bg-gray-100" />
         <PerPageDropdown @change="handlePerPageChange" v-model="pagination.perPage" box-class="bg-gray-100" />
@@ -34,13 +40,14 @@ import type { GetRepoIssuesListResponseDataType } from '@/types/octokit'
 import RepoIssueStateFilter from './RepoIssueStateFilter.vue'
 import type { IssueState } from '@/types/repos'
 import { onMounted, ref, type Ref } from 'vue'
-import { providerRepoGetIssues } from '@/api/providerRepository'
+import { providerIssueCount, providerRepoGetIssues } from '@/api/providerRepository'
 import { determinePagesRemaining } from '@/utilities/octakit'
 import type { Pagination, PaginatorOption, PerPageOption } from '@/types/pagination'
 import PrevNextPaginator from '@/components/pagination/PrevNextPaginator.vue'
 import { gitHubUrl, scrollTo } from '@/utilities'
 import PerPageDropdown from '@/components/pagination/PerPageDropdown.vue'
 import RepoIssueItem from './RepoIssueItem.vue'
+import BarChart from '@/components/charts/BarChart.vue'
 
 interface Props {
   owner: string
@@ -60,9 +67,11 @@ let pagination: Ref<Pagination> = ref({
   page: 1,
 })
 let noResults = ref(false)
+const loadingChart = ref(true)
+const chartData: Ref<[number, number] | null> = ref(null)
 
-onMounted(() => {
-  loadInitialData(false)
+onMounted(async () => {
+  await loadInitialData(false)
 })
 
 function clearFilter() {
@@ -91,6 +100,17 @@ function handlePageChange(option: PaginatorOption) {
   }
 }
 
+async function loadIssueTotals() {
+  const openIssues = await providerIssueCount(props.owner, props.repo, 'OPEN')
+  const closedIssues = await providerIssueCount(props.owner, props.repo, 'CLOSED')
+
+  if (typeof openIssues === 'number' && typeof closedIssues === 'number') {
+    chartData.value = [openIssues, closedIssues]
+  }
+
+  loadingChart.value = false
+}
+
 async function loadInitialData(scroll = true) {
   noResults.value = false
   if (props.owner && props.repo) {
@@ -100,6 +120,8 @@ async function loadInitialData(scroll = true) {
 
     if (!repoIssues.value.length) {
       noResults.value = true
+    } else {
+      loadIssueTotals()
     }
 
     if (scroll) {

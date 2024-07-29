@@ -1,11 +1,15 @@
 import { Octokit } from 'octokit'
 import { type OctokitOptions } from '@octokit/core'
 import { useMiscStore } from '@/stores/misc'
+import { useNotification } from '@kyvg/vue3-notification'
 
 class InterceptedOctokit extends Octokit {
-  constructor(params?: OctokitOptions) {
-    super()
+  constructor(options: OctokitOptions) {
+    super(options)
+    this.interceptRequests()
+  }
 
+  private interceptRequests() {
     this.hook.before('request', async (options) => {
       const miscStore = useMiscStore()
       miscStore.loading = true
@@ -20,11 +24,19 @@ class InterceptedOctokit extends Octokit {
 
     this.hook.error('request', async (error, options) => {
       const miscStore = useMiscStore()
+      const { notify } = useNotification()
+
       miscStore.loading = false
-      alert(error?.message || 'An error occurred')
-      throw error
+      notify({
+        title: error.name || 'Error',
+        text: error.message || 'An error occurred.',
+        type: 'error',
+        duration: -1,
+      })
     })
   }
 }
 
-export const octokit = new InterceptedOctokit({ auth: `${import.meta.env.VITE_GITHUB_TOKEN}` })
+export const octokit = new InterceptedOctokit({
+  auth: `${import.meta.env.VITE_GITHUB_TOKEN}`,
+})

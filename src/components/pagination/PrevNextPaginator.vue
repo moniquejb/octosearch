@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!(!hasNext && currentPage === 1)">
     <nav class="isolate inline-flex -space-x-px rounded-md shadow" aria-label="Pagination">
       <div @click="handlePageChange('prev')" :class="{ 'pointer-events-none !text-gray-200': !hasPrev, [`${boxClass}`]: true }" class="cursor-pointer relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 focus:z-20 focus:outline-offset-0">
         <font-awesome-icon class="w-5" icon="fa-chevron-left" size="sm" aria-hidden="true" />

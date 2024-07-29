@@ -7,7 +7,7 @@
     </div>
     <input id="search" type="text" placeholder="Search GitHub repositories..." v-model="modelValue" @keyup.enter="emit('submit')" class="block w-full h-full outline-none rounded-md border-0 py-1.5 pl-12 pr-20 text-gray-700 placeholder:text-gray-400 sm:text-base sm:leading-6" />
     <div class="absolute inset-y-0 right-0 flex items-center">
-      <button :disabled="!modelValue" @click="emit('submit')" class="bg-gray-300 py-0 text-gray-500 sm:text-xl font-bold h-full flex-center aspect-square rounded-e-md border-0 transition-colors hover:bg-gray-200 disabled:bg-gray-200 disabled:text-gray-300">GO</button>
+      <button :disabled="!modelValue" @click="emit('submit')" class="bg-gray-300 py-0 text-gray-500 sm:text-xl font-bold h-full flex-center aspect-square rounded-e-md border-0 transition-colors hover:bg-gray-200 disabled:bg-gray-300/60 disabled:text-gray-500/60">GO</button>
     </div>
   </div>
 </template>
