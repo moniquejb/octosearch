@@ -11,7 +11,7 @@ export function formatThousand(num: number): string {
 export const gitHubUrl = 'https://github.com'
 
 export function focusElement(id: string) {
-  document.getElementById(`#${id}`)?.focus()
+  document.getElementById(id)?.focus()
 }
 
 export function scrollTo(toScrollSelector = '', offset = -60, scrollIfAbove = true) {
