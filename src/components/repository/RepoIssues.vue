@@ -5,7 +5,7 @@
       Issues
     </div>
     <div v-if="repoIssues?.length" class="flex flex-col w-full">
-      <div v-if="loadingChart || chartData" class="w-full pb-4">
+      <div v-if="loadingChart || chartData" class="w-full pb-6 pt-1">
         <div class="max-w-80 mx-auto">
           <BarChart :data="chartData" />
         </div>
