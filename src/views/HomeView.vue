@@ -29,7 +29,7 @@
 import { providerRepoSearch } from '@/api/providerSearch'
 import type { SearchRepoResponseDataType } from '@/types/octokit'
 import { determinePagesRemaining } from '@/utilities/octakit'
-import { type Ref, ref } from 'vue'
+import { onMounted, type Ref, ref } from 'vue'
 import { focusElement, scrollTo } from '@/utilities'
 import PerPageDropdown from '@/components/pagination/PerPageDropdown.vue'
 import type { Pagination, PaginatorOption, PerPageOption } from '@/types/pagination'
@@ -46,6 +46,10 @@ let pagination: Ref<Pagination> = ref({
   page: 1,
 })
 let noResults = ref(false)
+
+onMounted(() => {
+  focusElement('search')
+})
 
 function handlePerPageChange(option: PerPageOption) {
   pagination.value.perPage = option
